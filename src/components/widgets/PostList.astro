@@ -1,0 +1,269 @@
+---
+import FormattedDate from '@/components/widgets/FormattedDate.astro'
+import type { PostListProps } from '@/types'
+import { themeConfig } from '@/config'
+
+const { posts } = Astro.props as PostListProps
+
+// Collect unique categories from posts
+const categories = ['All', ...Array.from(new Set(posts.map((p) => p.data.category).filter(Boolean)))]
+---
+
+<div class="post-list-wrapper">
+  <!-- Category Tabs -->
+  <div class="category-tabs" role="tablist" aria-label="Filter posts by category">
+    {
+      categories.map((cat, i) => (
+        <button
+          role="tab"
+          class={`tab${i === 0 ? ' active' : ''}`}
+          data-category={cat}
+          aria-selected={i === 0 ? 'true' : 'false'}
+        >
+          {cat === 'All' ? cat : cat.charAt(0).toUpperCase() + cat.slice(1)}
+        </button>
+      ))
+    }
+  </div>
+
+  <!-- Post List -->
+  <ul class="post-list">
+    {
+      posts.map((post) => (
+        <li data-category={post.data.category ?? ''}>
+          <a href={`/${post.id}/`}>
+            <div class={`post-item ${!themeConfig.date.dateOnRight ? 'date-left' : ''}`}>
+              {!themeConfig.date.dateOnRight && (
+                <p class="date font-features">
+                  <FormattedDate date={post.data.pubDate} context="list" />
+                </p>
+              )}
+              <p class="title">{post.data.title}</p>
+              {themeConfig.date.dateOnRight && (
+                <div class={themeConfig.general.postListDottedDivider ? 'dotted-divider' : 'divider'} />
+              )}
+              {themeConfig.date.dateOnRight && (
+                <p class="date font-features">
+                  <FormattedDate date={post.data.pubDate} context="list" />
+                </p>
+              )}
+            </div>
+            {post.data.techStack && post.data.techStack.length > 0 && (
+              <div class="tech-stack-list">({post.data.techStack.join(', ')})</div>
+            )}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <div class="placeholder"></div>
+</div>
+
+<script is:inline>
+  (function initTabs() {
+    const wrapper = document.querySelector('.post-list-wrapper')
+    if (!wrapper) return
+    const tabs = wrapper.querySelectorAll('.category-tabs .tab')
+    const items = wrapper.querySelectorAll('.post-list > li')
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const selected = tab.getAttribute('data-category') || 'All'
+
+        // Update tab active state
+        tabs.forEach((t) => {
+          t.classList.remove('active')
+          t.setAttribute('aria-selected', 'false')
+        })
+        tab.classList.add('active')
+        tab.setAttribute('aria-selected', 'true')
+
+        // Filter list items
+        items.forEach((item) => {
+          const cat = item.getAttribute('data-category') || ''
+          if (selected === 'All' || cat === selected) {
+            item.style.display = ''
+          } else {
+            item.style.display = 'none'
+          }
+        })
+      })
+    })
+  })()
+</script>
+
+<style is:global>
+  .post-list-wrapper .category-tabs {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 0.75rem;
+    border: none;
+    outline: none;
+    padding: 0;
+  }
+
+  .post-list-wrapper .category-tabs .tab {
+    all: unset;
+    font-family: inherit;
+    font-size: var(--font-size-m);
+    letter-spacing: var(--spacing-m);
+    color: var(--text-secondary);
+    cursor: pointer;
+    position: relative;
+    padding-bottom: 0.5rem;
+    transition: color 0.15s ease-out;
+    box-sizing: border-box;
+  }
+
+  .post-list-wrapper .category-tabs .tab::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background-color: transparent;
+    border-radius: 1px;
+    transition: background-color 0.15s ease-out;
+  }
+
+  .post-list-wrapper .category-tabs .tab:hover {
+    color: var(--text-primary);
+  }
+
+  .post-list-wrapper .category-tabs .tab:focus,
+  .post-list-wrapper .category-tabs .tab:focus-visible {
+    outline: none;
+    border: none;
+    box-shadow: none;
+  }
+
+  .post-list-wrapper .category-tabs .tab.active {
+    color: var(--text-primary);
+  }
+
+  .post-list-wrapper .category-tabs .tab.active::after {
+    background-color: var(--text-primary);
+  }
+</style>
+
+<style>
+  .post-list-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-list {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  a {
+    color: var(--text-primary);
+    display: block;
+    text-decoration: none;
+    transition: opacity 0.15s ease-out;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    ul:hover a {
+      opacity: 0.4;
+    }
+
+    ul:hover a:hover {
+      opacity: 1;
+    }
+
+    ul:hover a:hover .divider {
+      background-color: var(--text-tertiary);
+      opacity: 0.75;
+    }
+    ul:hover a:hover .dotted-divider {
+      color: var(--text-secondary);
+    }
+    ul:hover a:hover .date {
+      color: var(--text-secondary);
+      opacity: 1;
+    }
+  }
+
+  .post-item {
+    height: 2.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .post-item.date-left {
+    justify-content: flex-start;
+  }
+
+  .post-item.date-left .title {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .post-item.date-left .date {
+    margin-right: 0.75rem;
+  }
+
+  .title {
+    margin: 0;
+    flex-shrink: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .date {
+    margin: 0;
+    color: var(--text-primary);
+    letter-spacing: var(--spacing-s);
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .divider {
+    flex: 1 1 auto;
+    min-width: 3rem;
+    margin: 0 0.25rem;
+    height: 0.5px;
+    background-color: var(--border);
+  }
+
+  .dotted-divider {
+    flex: 1 1 3rem;
+    min-width: 3rem;
+    max-width: 100%;
+    text-align: end;
+    letter-spacing: 5px;
+    height: 1.675rem;
+    overflow: hidden;
+    color: var(--text-tertiary);
+    opacity: 0.75;
+  }
+
+  .dotted-divider::after {
+    content: '·····························································································································································';
+    pointer-events: none;
+  }
+
+  .placeholder {
+    height: 3rem;
+  }
+
+  .tech-stack-list {
+    font-size: 0.8em;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: -0.8rem;
+  }
+</style>

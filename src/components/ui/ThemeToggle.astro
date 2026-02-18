@@ -1,0 +1,77 @@
+---
+import { themeConfig } from '@/config'
+---
+
+{
+  themeConfig.general.themeToggle && (
+    <button id="theme-toggle" aria-label="Toggle theme" style="all:unset;cursor:pointer;display:flex;align-items:center;-webkit-tap-highlight-color:transparent;">
+      <span id="tt-track" style="display:flex;align-items:center;justify-content:space-between;width:52px;height:26px;border-radius:13px;position:relative;padding:0 7px;box-sizing:border-box;transition:background-color 0.3s ease,color 0.3s ease;">
+        <svg style="position:relative;z-index:1;flex-shrink:0;" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+          <circle cx="12" cy="12" r="5" />
+          <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+        <span id="tt-knob" style="position:absolute;top:3px;width:20px;height:20px;border-radius:50%;transition:left 0.3s cubic-bezier(0.4,0,0.2,1),background-color 0.3s ease,box-shadow 0.3s ease;z-index:2;"></span>
+        <svg style="position:relative;z-index:1;flex-shrink:0;" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      </span>
+    </button>
+  )
+}
+
+<script is:inline>
+  function updateToggleAppearance() {
+    var track = document.getElementById('tt-track')
+    var knob = document.getElementById('tt-knob')
+    if (!track || !knob) return
+
+    var isDark = document.documentElement.classList.contains('dark')
+
+    if (isDark) {
+      track.style.backgroundColor = 'rgba(255,255,255,0.15)'
+      track.style.color = 'rgba(255,255,255,0.5)'
+      knob.style.left = '29px'
+      knob.style.backgroundColor = '#e0e0e0'
+      knob.style.boxShadow = '0 1px 3px rgba(0,0,0,0.4)'
+    } else {
+      track.style.backgroundColor = 'rgba(0,0,0,0.1)'
+      track.style.color = 'rgba(0,0,0,0.45)'
+      knob.style.left = '3px'
+      knob.style.backgroundColor = '#ffffff'
+      knob.style.boxShadow = '0 1px 3px rgba(0,0,0,0.2)'
+    }
+  }
+
+  function bindThemeToggle() {
+    var btn = document.getElementById('theme-toggle')
+    if (!btn || !window.ThemeManager) return
+    if (btn.dataset.themeBound) return
+    btn.dataset.themeBound = 'true'
+
+    updateToggleAppearance()
+
+    btn.addEventListener('click', function (e) {
+      e.preventDefault()
+      e.stopPropagation()
+      window.ThemeManager.toggle()
+      setTimeout(updateToggleAppearance, 10)
+    })
+
+    document.addEventListener('themechange', updateToggleAppearance)
+  }
+
+  document.addEventListener('astro:page-load', bindThemeToggle)
+  // Also try immediately
+  if (document.readyState !== 'loading') {
+    bindThemeToggle()
+  } else {
+    document.addEventListener('DOMContentLoaded', bindThemeToggle)
+  }
+</script>

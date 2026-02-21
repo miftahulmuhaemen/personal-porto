@@ -22,7 +22,7 @@ const items = resumeEntry?.data?.items ?? []
 )}
 
 <script is:inline>
-  (function initResumeDropdown() {
+  document.addEventListener('astro:page-load', () => {
     const dropdown = document.querySelector('.resume-dropdown');
     if (!dropdown) return;
     const trigger = dropdown.querySelector('.resume-trigger');
@@ -57,7 +57,7 @@ const items = resumeEntry?.data?.items ?? []
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') close();
     });
-  })();
+  });
 </script>
 
 <style>

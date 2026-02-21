@@ -8,6 +8,7 @@ techStack: ['React', 'Python Notebook', 'Data Scrapping']
 ![Sipamanobat](./_assets/sipamanobat.png)
 
 - [X] Server Alive
+- [X] Actively used by few Pharmacists and maintained
 
 ::link{url="https://sipamanobat.my.id/"}
 

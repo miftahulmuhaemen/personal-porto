@@ -8,6 +8,7 @@ techStack: ['React']
 ![Sanak Family Tree](./_assets/familytree.png)
 
 - [X] Server Alive
+- [X] Actively maintained
 
 ::link{url="https://sanak.muhaemen.my.id/"}
 

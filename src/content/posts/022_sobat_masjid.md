@@ -8,7 +8,8 @@ techStack: ['Android', 'Kotlin']
 ![Sobat Masjid](./_assets/sobat_masjid.png)
 
 - [X] Server Status Unclear, but the app no longer on the playstore 
-- [X] Obsolote
+- [X] At the time actively used by hundreds of users and properly monitored by few organization because the startup got the funding 
+- [X] Obsolete
 
 ::link{url="https://sobatmasjid.com/"}
 

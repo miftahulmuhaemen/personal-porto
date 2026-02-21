@@ -9,13 +9,15 @@ const today = new Date()
       <span class="date">
         &copy;
         {today.getFullYear()}
-      </span>
-      {themeConfig.site.author}
-    </div>
-    <div class="powered-by">
-      Powered by{' '}
+      </span>/ 
+      {themeConfig.site.author} · Powered by{' '}
       <a href="https://astro.build">Astro</a> &{' '}
       <a href="https://github.com/the3ash/astro-chiri">Chiri</a>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:miftahul@muhaemen.my.id">Email</a> /
+      <a href="https://www.instagram.com/miftahulmuhaemen/" target="_blank" rel="noopener noreferrer">Instagram</a> /
+      <a href="https://github.com/miftahulmuhaemen" target="_blank" rel="noopener noreferrer">GitHub</a>
     </div>
   </div>
 </footer>
@@ -47,13 +49,24 @@ const today = new Date()
     opacity: 1;
   }
 
+  .powered-by {
+    margin-top: 0.25rem;
+  }
+
+  .footer-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
   footer a {
     color: var(--text-secondary);
     text-decoration: none;
-    transition: color 0.2s ease-out;
+    transition: color 0.15s ease-out;
   }
 
   footer a:hover {
     color: var(--text-primary);
   }
 </style>
+

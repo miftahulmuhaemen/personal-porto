@@ -7,6 +7,7 @@ const { posts } = Astro.props as PostListProps
 
 // Collect unique categories from posts
 const categories = ['All', ...Array.from(new Set(posts.map((p) => p.data.category).filter(Boolean)))]
+const defaultCategory = 'product'
 ---
 
 <div class="post-list-wrapper">
@@ -16,9 +17,9 @@ const categories = ['All', ...Array.from(new Set(posts.map((p) => p.data.categor
       categories.map((cat, i) => (
         <button
           role="tab"
-          class={`tab${i === 0 ? ' active' : ''}`}
+          class={`tab${cat.toLowerCase() === defaultCategory ? ' active' : ''}`}
           data-category={cat}
-          aria-selected={i === 0 ? 'true' : 'false'}
+          aria-selected={cat.toLowerCase() === defaultCategory ? 'true' : 'false'}
         >
           {cat === 'All' ? cat : cat.charAt(0).toUpperCase() + cat.slice(1)}
         </button>
@@ -30,7 +31,7 @@ const categories = ['All', ...Array.from(new Set(posts.map((p) => p.data.categor
   <ul class="post-list">
     {
       posts.map((post) => (
-        <li data-category={post.data.category ?? ''}>
+        <li data-category={post.data.category ?? ''} style={post.data.category !== defaultCategory ? 'display:none' : ''}>
           <a href={`/${post.id}/`}>
             <div class={`post-item ${!themeConfig.date.dateOnRight ? 'date-left' : ''}`}>
               {!themeConfig.date.dateOnRight && (

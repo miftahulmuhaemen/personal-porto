@@ -14,10 +14,8 @@ import remarkTOC from './src/plugins/remark-toc.mjs'
 import { themeConfig } from './src/config'
 import { imageConfig } from './src/utils/image-config'
 import path from 'path'
-import staticIntegration from '@astrojs/netlify/static'
 
 export default defineConfig({
-  adapter: staticIntegration(), // Set adapter for deployment, or set `linkCard` to `false` in `src/config.ts`
   site: themeConfig.site.website,
   image: {
     service: {

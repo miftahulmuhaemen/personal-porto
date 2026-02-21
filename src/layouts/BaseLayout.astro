@@ -19,6 +19,7 @@ const finalWidth = shouldUseCustomWidth ? `${widthValue}rem` : '25rem'
 
 <html lang={language}>
   <head>
+    <meta name="robots" content="noindex, nofollow" />
     <ThemeManager />
     {fadeAnimation && <ClientRouter />}
     <slot name="head" />

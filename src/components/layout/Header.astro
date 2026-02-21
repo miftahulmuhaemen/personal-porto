@@ -1,12 +1,16 @@
 ---
 import { themeConfig } from '@/config'
 import ThemeToggle from '@/components/ui/ThemeToggle.astro'
+import ResumeButton from '@/components/ui/ResumeButton.astro'
 ---
 
 <header>
   <nav>
     <a href="/">{themeConfig.site.title}</a>
-    <ThemeToggle />
+    <div class="nav-actions">
+      <ResumeButton />
+      <ThemeToggle />
+    </div>
   </nav>
 </header>
 <style>
@@ -24,5 +28,10 @@ import ThemeToggle from '@/components/ui/ThemeToggle.astro'
     text-decoration: none;
     min-width: 3rem;
     display: inline-block;
+  }
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
   }
 </style>

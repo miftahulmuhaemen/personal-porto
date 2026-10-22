@@ -1,27 +1,35 @@
 ---
-title: 'Perpustakaan Bank Indonesia Banjarmasin'
+title: 'Bank Indonesia Regional Library Management System'
 pubDate: '2020-03-01'
-techStack: ['PHP', 'Codeigniter 3']
+techStack: ['PHP', 'CodeIgniter 3', 'MySQL', 'Bootstrap 4', 'DataTables']
 category: 'product'
 ---
 
-- [X] Server Dead 
-- [X] Obsolote
+- [x] Contract Delivery for Bank Indonesia Regional Office (Banjarmasin)
+- [x] Institutional On-Premises Server Decommissioned
 
-## Official Description
+## Overview
 
-Library website for Bank Indonesia Regional Office Banjarmasin. Its purpose is for check existing books and tracking borrowed books. Easly accessable for public.
+The Bank Indonesia Regional Office in Banjarmasin maintains a specialized public and staff reference library. Prior to digitization, circulation workflows, book inventories, and loan returns were recorded in paper logs or manual spreadsheets, making inventory audits and overdue tracking inefficient.
 
-## Breakdown
+This web application provided a centralized library information and circulation management system. It enabled public visitors to browse and search available collections while providing librarians with automated borrowing lifecycle tracking and inventory management.
 
-The client, Bank Indonesia Regional Banjarmasin ask us to build a website for their public library to show what books available and tracking borrowed books as well. Based on the resul of requirement gathering as well as our prefered tech stack, we choose Codeigniter PHP, MySQL, and Bootstrap 4.
+## Architecture and Technical Implementation
 
-Few features we implement including,
-1. Register and Login
-2. List books with category and search
-3. Borrow and return books
-4. Admin dashboard to manage books and users
+### 1. MVC Application Architecture
+
+Developed with CodeIgniter 3 following the classic Model-View-Controller (MVC) pattern:
+
+- **Modular Separation**: Controller endpoints (`Admin.php`, `User.php`, `Welcome.php`) isolate public catalog routes from restricted administrative actions.
+- **Relational Data Modeling**: MySQL schema design implemented via Active Record models (`M_buku.php`, `M_user.php`, `M_pages.php`), establishing foreign key constraints across book entities, categories, membership tiers, and circulation transaction tables.
+- **Client Interface**: Responsive UI utilizing Bootstrap 4 paired with DataTables for client-side sorting, pagination, and multi-attribute catalog search.
+
+### 2. Core Functional Modules
+
+- **Public Book Catalog & Classification**: Searchable inventory categorized by subject (economics, central banking, monetary policy, jurisprudence), showing real-time rack location and availability status.
+- **Circulation Lifecycle Tracking**: Automated logging of loan transactions, scheduled return deadlines, and overdue calculation.
+- **Librarian Administrative Suite**: Back-office dashboard for registering new acquisitions, assigning ISBNs and physical rack numbers, and auditing member loan histories.
 
 ## Repository
 
-::github{repo="miftahulmuhaemen/perpustakaanBI"}
+::github{repo="miftahulmuhaemen/Web-Perpustakaan-BI"}

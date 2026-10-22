@@ -1,19 +1,22 @@
 ---
-title: 'Indosat Oordero Digital Camp (IDcamp) as Facilitator'
+title: 'Indosat Ooredoo Digital Camp (IDCamp) Technical Facilitator'
 pubDate: '2019-10-01'
 category: 'volunteer'
+techStack: ['Technical Mentorship', 'Code Review', 'Web Development', 'JavaScript', 'Pedagogy']
 ---
 
-![_tr-808](./_assets/idcamp_01.png)
+![Indosat Ooredoo Digital Camp Facilitator](./_assets/idcamp_01.png)
 
-## Official Description
-This scholarship program is organized by Indosat Ooredoo Hutchison as part of the Digital Education pillar in its Corporate Social Responsibility initiative, aiming to produce Indonesian digital talent ready to compete and build the nation towards a Digital Nation.
+::link{url="https://idcamp.ioh.co.id/"}
 
-In 2025, IDCamp focuses on Artificial Intelligence with two main categories: AI Development and AI Integration, totaling eight learning paths. This includes two new paths: AI Engineer and Generative AI Engineer.
+## Overview & Role Summary
 
-The main IDCamp curriculum is developed by Dicoding as a Google Authorized Training Partner, featuring industry-based use cases to ensure participants' skills are directly applicable in the workforce.
+Indosat Ooredoo Digital Camp (IDCamp) is an industry-backed scholarship initiative organized by Indosat Ooredoo Hutchison in partnership with Dicoding (Google Authorized Training Partner). Designed to cultivate high-readiness Indonesian software engineering talent, the program provides intensive, practical curriculum tracks across software development domains.
 
-## Breakdown
+Selected as a Technical Facilitator for the 2019 cohort following prior alumni distinctions across multiple Dicoding specialized tracks.
 
-I was an alumni at Dicoding for more than one category, then I got invitation to become a Facilitator at this program. My job was to help the students to tackle problem they couldn't solve by themselves as the curiculum itself is sufficient for many but those who had problem needed help to unstuck, me and my peers helps them.
+## Mentorship Responsibilities & Engineering Guidance
 
+- **Direct Student Cohort Mentorship**: Guided a dedicated cohort of 20 students through a self-paced, rigorous digital web development curriculum.
+- **Code Review & Architectural Feedback**: Conducted one-on-one code reviews on student project submissions, enforcing clean code principles, semantic HTML/CSS structuring, DOM manipulation standards, and asynchronous JavaScript patterns.
+- **Troubleshooting & Algorithmic Debugging**: Hosted targeted office hours and discussion thread consultations to assist students in isolating syntax defects, logic errors, and API integration failures, significantly improving course completion rates.

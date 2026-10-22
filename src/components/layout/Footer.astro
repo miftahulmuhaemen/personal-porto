@@ -1,72 +1,78 @@
 ---
-import { themeConfig } from '@/config'
-const today = new Date()
+import { quotes } from '@/data/quotes'
+
+// Fallback initial quote for SSR / prerender
+const initialQuote = quotes[0]
 ---
 
 <footer>
   <div class="footer-content">
-    <div class="copyright">
-      <span class="date">
-        &copy;
-        {today.getFullYear()}
-      </span>/ 
-      {themeConfig.site.author} · Powered by{' '}
-      <a href="https://astro.build">Astro</a> &{' '}
-      <a href="https://github.com/the3ash/astro-chiri">Chiri</a>
-    </div>
-    <div class="footer-links">
-      <a href="mailto:miftahul@muhaemen.my.id">Email</a> /
-      <a href="https://www.instagram.com/miftahulmuhaemen/" target="_blank" rel="noopener noreferrer">Instagram</a> /
-      <a href="https://github.com/miftahulmuhaemen" target="_blank" rel="noopener noreferrer">GitHub</a>
-    </div>
+    <p id="footer-quote" class="valar" title="Click to randomize quote">{initialQuote}</p>
   </div>
 </footer>
+
+<script>
+  import { quotes } from '@/data/quotes'
+
+  function randomizeQuote() {
+    const el = document.getElementById('footer-quote')
+    if (!el || quotes.length === 0) return
+    const randomIndex = Math.floor(Math.random() * quotes.length)
+    el.textContent = quotes[randomIndex]
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    randomizeQuote()
+
+    const el = document.getElementById('footer-quote')
+    if (el && !el.dataset.bound) {
+      el.dataset.bound = 'true'
+      el.addEventListener('click', randomizeQuote)
+    }
+  })
+</script>
+
 <style>
   footer {
-    font-size: var(--font-size-s);
-    font-weight: var(--font-weight-light);
-    line-height: 1.75;
-    color: var(--text-secondary);
-    opacity: 0.75;
+    font-size: var(--font-size-m);
+    line-height: 1.6;
     margin-top: 4rem;
+    margin-bottom: 2.5rem;
+    text-align: center;
+    opacity: 1 !important;
   }
 
   .footer-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    flex-direction: row;
-    flex-wrap: nowrap;
     width: 100%;
   }
 
-  .copyright,
-  .powered-by {
-    white-space: nowrap;
+  .valar {
+    margin: 0;
+    font-family: var(--serif);
+    font-style: italic;
+    letter-spacing: 0.02em;
+    color: #000000 !important;
+    opacity: 1 !important;
+    cursor: pointer;
+    user-select: none;
   }
 
-  .copyright .date {
-    opacity: 1;
+  @media (prefers-color-scheme: dark) {
+    .valar {
+      color: #ffffff !important;
+    }
   }
 
-  .powered-by {
-    margin-top: 0.25rem;
+  :global(html.light) .valar {
+    color: #000000 !important;
+    opacity: 1 !important;
   }
 
-  .footer-links {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  footer a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: color 0.15s ease-out;
-  }
-
-  footer a:hover {
-    color: var(--text-primary);
+  :global(html.dark) .valar {
+    color: #ffffff !important;
+    opacity: 1 !important;
   }
 </style>
-

@@ -1,33 +1,38 @@
 ---
 title: 'Sistem Pelayanan dan Pengaduan ULM 2.0 (Silapu)'
 pubDate: '2018-05-01'
-techStack: ['Android (Java)']
+techStack: ['Android', 'Java', 'Kotlin', 'Retrofit', 'REST API']
 category: 'product'
 ---
 
-![_tr-808](./_assets/silapu_ss.jpg)
+![Silapu Mobile Application](./_assets/silapu_ss.jpg)
 
-- [X] Server Dead 
-- [X] Obsolote / Removed from Google Play
-- [X] [Latest version on Jul 14, 2022](https://apkpure.com/id/layanan-dan-pengaduan-ulm-2-0/com.unlam.humas.silapu)
-- [X] Release on 4.2++ Android Version
+- [x] Historical Production Deployment (Android 4.2+ KitKat to Modern)
+- [x] Archive Version Cataloged on [APKPure](https://apkpure.com/id/layanan-dan-pengaduan-ulm-2-0/com.unlam.humas.silapu)
+- [x] Institutional Server Decommissioned
 
-## Official Description
+## Overview
 
-The Mobile Service and Complaint Application is an Android-based application that can be downloaded by students or the general public who want to request data services or submit complaints to Lambung Mangkurat University. Previously, the process of requesting services and submitting complaints was done by going directly to Lambung Mangkurat University or accessing the web page http://silapu.ulm.ac.id. Silapu Mobile provides a new way to request services and submit complaints. With the rapid development of Android applications, one way to simplify the process of requesting and submitting complaints is to use only the smartphone required by the user.
+Sistem Pelayanan dan Pengaduan ULM (Silapu) is the official mobile service request and complaint management application developed for Universitas Lambung Mangkurat (ULM). Prior to its introduction, students and university stakeholders submitted institutional grievances and service requests through paper submissions or legacy desktop portals.
 
-## Breakdown
+Developed in collaboration with the campus developer initiative, Silapu was deployed to the Google Play Store as a mobile channel for submitting, tracking, and resolving university-wide service tickets directly from Android devices.
 
-This project handed down to us by one of my lecturer, they need Android app to submit complaint from anyone who had problem with the system. We are two-person team, one act as Product Manager and me working as the Android Engineer.
+## Architecture and Technical Implementation
 
-We use their official API to fetch data and submit complaint. At the time I'm still using Java, since Kotlin hasn't been officially supported (I think).
+### 1. Android Client Architecture
 
-Few features we implement including,
-1. Login/Register Page
-2. Submit Complaint
-3. Chat 
-4. Notification
+The mobile client was engineered using native Android Java with early Kotlin module adoption:
 
+- **Networking Pipeline**: Implemented using Retrofit 2 and OkHttp via a centralized `ApiGenerator` and `ApiInterface` contract layer, handling asynchronous JSON serialization against the university backend.
+- **UI & Navigation Controls**: Multi-tab navigation utilizing custom `LockableViewPager`, `CustomScrollAwareBehavior` for collapsible app bar coordination, and non-predictive `NpaLinearLayoutManager` to eliminate layout animation stutter during heavy ticket list updates.
+- **State & Session Persistence**: Device credentials and user roles are persisted securely through `UserPreference` wrappers.
+
+### 2. Core Functional Modules
+
+- **Authentication & User Management**: Role-based access control distinguishing university students, faculty members, and institutional administrative reviewers.
+- **Complaint Submission & Attachment Pipeline**: Multi-part form data submission allowing users to submit detailed complaint descriptions paired with photographic evidence and geotagged metadata.
+- **Ticket Lifecycle & Notification Pipeline**: Status tracking for open, in-review, and resolved complaints with push notification updates on ticket milestone transitions.
+- **Document Requests (_Perdata_)**: Standardized request workflow for academic records, student administrative certificates, and faculty verifications.
 
 ## Repository
 

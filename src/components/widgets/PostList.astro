@@ -5,8 +5,10 @@ import { themeConfig } from '@/config'
 
 const { posts } = Astro.props as PostListProps
 
-// Collect unique categories from posts
-const categories = ['All', ...Array.from(new Set(posts.map((p) => p.data.category).filter(Boolean)))]
+// Collect unique categories from posts (excluding 'All')
+const categories = Array.from(
+  new Set(posts.map((p) => p.data.category).filter((c): c is string => Boolean(c) && c.toLowerCase() !== 'all'))
+)
 const defaultCategory = 'product'
 ---
 
@@ -31,7 +33,10 @@ const defaultCategory = 'product'
   <ul class="post-list">
     {
       posts.map((post) => (
-        <li data-category={post.data.category ?? ''} style={post.data.category !== defaultCategory ? 'display:none' : ''}>
+        <li
+          data-category={post.data.category ?? ''}
+          style={post.data.category !== defaultCategory ? 'display:none' : ''}
+        >
           <a href={`/${post.id}/`}>
             <div class={`post-item ${!themeConfig.date.dateOnRight ? 'date-left' : ''}`}>
               {!themeConfig.date.dateOnRight && (
@@ -70,25 +75,27 @@ const defaultCategory = 'product'
 
     function activateTab(category) {
       tabs.forEach((t) => {
-        const isCurrent = (t.getAttribute('data-category') || 'All') === category
+        const isCurrent = (t.getAttribute('data-category') || 'product') === category
         t.classList.toggle('active', isCurrent)
         t.setAttribute('aria-selected', isCurrent ? 'true' : 'false')
       })
       items.forEach((item) => {
         const cat = item.getAttribute('data-category') || ''
-        item.style.display = (category === 'All' || cat === category) ? '' : 'none'
+        item.style.display = cat === category ? '' : 'none'
       })
     }
 
-    // Restore saved tab, if any
+    // Restore saved tab, if any (fallback to product if All or missing)
     const saved = sessionStorage.getItem(STORAGE_KEY)
-    if (saved) {
+    if (saved && saved !== 'All') {
       activateTab(saved)
+    } else {
+      activateTab('product')
     }
 
     tabs.forEach((tab) => {
       tab.addEventListener('click', () => {
-        const selected = tab.getAttribute('data-category') || 'All'
+        const selected = tab.getAttribute('data-category') || 'product'
         sessionStorage.setItem(STORAGE_KEY, selected)
         activateTab(selected)
       })

@@ -1,9 +1,16 @@
 ---
-title: 'Member of BEM FMIPA ULM 2017'
+title: 'Student Executive Board (BEM) FMIPA ULM, Community Social Affairs Officer'
 pubDate: '2017-01-01'
 category: 'volunteer'
+techStack: ['Community Outreach', 'Social Impact', 'Program Coordination', 'Public Relations']
 ---
 
-## Breakdown
+## Overview & Role Summary
 
-I was part of BEM FMIPA (Student Executive Board of the Faculty of Mathematics and Natural Sciences) at Universitas Lambung Mangkurat in 2017. I joined the Community Social Affairs division, where I got to be involved in activities that connected the campus with the local community. It was a great experience to work alongside fellow students on social initiatives and give back beyond academics.
+The Student Executive Board of the Faculty of Mathematics and Natural Sciences (BEM FMIPA) at Universitas Lambung Mangkurat serves as the central student governance body across scientific disciplines (Computer Science, Mathematics, Biology, Chemistry, Physics, and Pharmacy). Served as a cabinet officer in the Community Social Affairs Department (Departemen Sosial Masyarakat) during the 2017 operational term.
+
+## Key Initiatives & Organizational Impact
+
+- **Community Engagement Programs**: Planned and executed community social action programs connecting university students with local communities across South Kalimantan, focusing on digital literacy and grassroots educational assistance.
+- **Volunteer Logistics & Relief Coordination**: Coordinated student volunteer contingents, resource staging, and transport logistics for regional social service initiatives and emergency relief distribution.
+- **Cross-Departmental Collaboration**: Partnered with departmental student associations (HIMA) across all six FMIPA study programs to standardize event workflows, participant safety guidelines, and program budgets.

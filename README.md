@@ -1,63 +1,98 @@
-# Chiri 🌸
+# Technical Portfolio - Miftahul Muhaemen
 
-![screenshot-light](public/screenshots/screenshot-light.png)
-![screenshot-dark](public/screenshots/screenshot-dark.png)
+Engineering portfolio and production case studies for Miftahul Muhaemen (Software & Data Engineer). Deployed on [Cloudflare Pages](https://pages.cloudflare.com/) at [muhaemen.my.id](https://muhaemen.my.id).
 
-Chiri is a minimal blog theme built with [Astro](https://astro.build), offering customization options while preserving its clean aesthetic.
+---
 
-Check the [demo](https://chiri.the3ash.com/) for more details.
+## 1. Overview & Architecture
 
-## Features
+Built with [Astro](https://astro.build) using static site generation (SSG) for fast edge delivery, semantic markup, and zero client-side JavaScript overhead where possible.
 
-- [x] Build with Astro
-- [x] Responsive
-- [x] Light / Dark mode
-- [x] MDX
-- [x] KaTeX
-- [x] Sitemap
-- [x] OpenGraph
-- [x] RSS
+- **Framework**: Astro 5 (Static Site Generation)
+- **Language**: TypeScript 5.9
+- **Content Engine**: Astro Content Collections (`src/content/posts/`, `src/content/about/`)
+- **Styling**: Scoped CSS with CSS variables for light/dark mode transitions, typography driven by Inter (sans) and Besley (serif)
+- **Asset Processing**: Sharp for automated WebP image conversion and responsive dimensions
+- **Math & Media**: KaTeX math rendering, custom remark/rehype plugins for embedded media and syntax highlighting
+- **Deployment & Edge**: Cloudflare Pages with custom DNS, CAA validation, and edge-level bot protection policies via Cloudflare CLI (`cf`)
 
-## Getting Started
+---
 
-1. [Fork](https://github.com/the3ash/astro-chiri/fork) this repository, or use this template to [create a new repository](https://github.com/new?template_name=astro-chiri&template_owner=the3ash).
+## 2. Content Standards
 
-2. Run the following commands:
+All project breakdowns and articles adhere to the [Technical Portfolio Writing Standards](.agent/rules/writing_style.md):
 
-   ```bash
-   git clone <your-repo-url>
+- **Evidence Over Adjectives**: Mechanics, architecture diagrams, data models, and measurable trade-offs rather than generic adjectives.
+- **Anti-Slop Copywriting**: Zero marketing fluff, zero machine-generated filler words, and zero decorative emojis in headers and copy.
+- **Standardized Hierarchy**: Frontmatter metadata, operational status checklists, architecture breakdowns, data integrity optimizations, and testing/observability notes.
 
-   cd <your-repo-name>
+---
 
-   pnpm install
+## 3. Project Structure
 
-   pnpm dev
-   ```
+```
+├── .agent/rules/           # Writing and technical portfolio guidelines
+├── public/                 # Static assets, favicon, resumes, videos
+│   ├── resumes/            # Verified Fullstack & No-Code resume PDFs
+│   └── videos/             # Architecture and platform demo screencasts
+├── src/
+│   ├── components/         # Modular Astro UI components
+│   │   ├── layout/         # BaseHead, Header, Footer, Transitions
+│   │   ├── ui/             # ThemeToggle, ThemeManager, LinkCard, ImageOptimizer
+│   │   └── widgets/        # PostList, About, FormattedDate
+│   ├── content/
+│   │   ├── about/          # Profile intro & resume markdown
+│   │   └── posts/          # Case studies, certifications, work history
+│   ├── data/
+│   │   └── quotes.ts       # Curated quotes dataset with client-side randomizer
+│   ├── layouts/            # IndexLayout, PostLayout, BaseLayout
+│   ├── plugins/            # Remark and Rehype build plugins
+│   └── styles/             # Global CSS variables, fonts, post typography
+└── astro.config.ts         # Astro pipeline integrations and Vite configurations
+```
 
-3. Edit `src/config.ts` and `src/content/about/about.md` to your liking.
+---
 
-4. Use `pnpm new <title>` to create new posts, or add your posts to `src/content/posts`.
+## 4. Development & Build
 
-5. You need to set adapter as follows before deploying to Netlify, Vercel, or other platforms, but you can set `linkCard` to `false` in `src/config.ts` to skip this step:
-   - **Netlify**: `pnpm add @astrojs/netlify` and add `adapter: netlify()` in `astro.config.ts`.
-   - **Vercel**: `pnpm add @astrojs/vercel` and add `adapter: vercel()` in `astro.config.ts`.
-   - **Static (e.g. GitHub Pages)**: `pnpm add @astrojs/static` and add `adapter: static()` in `astro.config.ts`.
-   - Refer to [Astro Deployment Guides](https://docs.astro.build/en/guides/deploy/) for more details.
+### Prerequisites
 
-&emsp;[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start) [![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new)
+- Node.js 20+ (LTS recommended)
+- pnpm 9+
 
-## Commands
+### Commands
 
-- `pnpm new <title>` - Create a new post (use `_title` for drafts)
-- `pnpm update-theme` - Update the theme to the latest version
+```bash
+# Install dependencies
+pnpm install
 
-## References
+# Start local dev server (default: http://localhost:4321)
+pnpm dev
 
-- https://paco.me/
-- https://benji.org/
-- https://shud.in/
-- https://retypeset.radishzz.cc/
+# Build static production bundle to dist/
+pnpm build
 
-## License
+# Preview production build locally
+pnpm preview
+
+# Run linter
+pnpm lint
+
+# Format codebase with Prettier
+pnpm format
+
+# Scaffold a new post / case study
+pnpm new "<post-title>"
+```
+
+---
+
+## 5. Deployment
+
+Production builds are triggered automatically upon pushing to the `master` branch. Cloudflare Pages executes `pnpm build` and serves static assets from `dist/` across the Cloudflare global network.
+
+---
+
+## 6. License
 
 MIT

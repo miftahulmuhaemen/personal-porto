@@ -19,10 +19,10 @@
     "@astrojs/mdx": "^4.3.13",
     "@astrojs/rss": "^4.0.15",
     "@astrojs/sitemap": "^3.7.0",
-    "@playform/inline": "^0.1.2",
+    "@playform/inline": "^0.1.4",
     "astro": "^5.17.1",
     "astro-og-canvas": "^0.10.1",
-    "canvaskit-wasm": "^0.40.0",
+    "canvaskit-wasm": "^0.42.0",
     "feed": "^5.2.0",
     "katex": "^0.16.28",
     "markdown-it": "^14.1.0",
@@ -33,7 +33,7 @@
     "remark-directive": "^4.0.0",
     "remark-math": "^6.0.0",
     "sanitize-html": "^2.17.0",
-    "sharp": "^0.34.5",
+    "sharp": "^0.35.5",
     "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
@@ -48,7 +48,7 @@
     "globals": "^17.3.0",
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
-    "tsx": "^4.21.0",
+    "tsx": "^4.23.15",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.54.0"
   }

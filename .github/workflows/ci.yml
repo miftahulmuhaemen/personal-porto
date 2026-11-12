@@ -77,10 +77,7 @@ jobs:
     if: >
       github.event_name == 'pull_request' &&
       github.event.pull_request.draft == false &&
-      (
-        github.actor == 'dependabot[bot]' ||
-        contains(github.event.pull_request.labels.*.name, 'automerge')
-      )
+      contains(github.event.pull_request.labels.*.name, 'automerge')
 
     steps:
       - name: Checkout code
